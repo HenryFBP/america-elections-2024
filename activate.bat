@@ -1,1 +1,0 @@
-conda activate america-elections-2024
