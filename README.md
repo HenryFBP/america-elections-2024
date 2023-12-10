@@ -1,3 +1,11 @@
+# Tech
+
+https://ollama.ai/library/mistral
+https://www.youtube.com/watch?v=XFiof0V3nhA
+https://www.youtube.com/watch?v=yBI1nPep72Q
+
+# Ideas
+
 https://thehill.com/opinion/campaign/4162222-tracking-americas-freefall-down-the-rabbit-hole-of-toxic-politics/
 
 An idea I just had about the 2024 election. I got tricked in 2020 into believing a lot of things that were false, and don't want others to go through it again.
