@@ -1,1 +1,5 @@
 *.secret.*
+*.pyc
+.env
+*.png
+cookies.pkl
