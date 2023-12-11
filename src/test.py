@@ -28,6 +28,7 @@ def test_can_query_api():
 
   print(completion.choices[0].message)
 
+  return True
 
 class FacebookWebDriver(webdriver.Chrome):
     
@@ -100,12 +101,8 @@ class FacebookWebDriver(webdriver.Chrome):
 
         root.mainloop()
 
-
-
-
 def scape_posts_from_user(url:str):
 
-  
   driver=FacebookWebDriver()
   driver.login_to_facebook(
     os.environ.get("FACEBOOK_USERNAME"),
