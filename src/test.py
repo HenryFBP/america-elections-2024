@@ -8,6 +8,7 @@ import pickle
 import tkinter as tk
 from tkinter import messagebox
 import tinydb
+import facebook
 
 from dotenv import load_dotenv
 
@@ -30,91 +31,16 @@ def test_can_query_api():
 
   return True
 
-class FacebookWebDriver(webdriver.Chrome):
-    
-    def is_logged_in(self)->bool:
-      return ("Memories" in self.page_source)
-
-    def login_to_facebook(self, username, password):
-        
-        def save_cookies(self=self):
-        # Check if we're logged in. if so, save cookies
-          if(self.is_logged_in()):
-            cookies = self.get_cookies()
-            with open("cookies.pkl", "wb") as file:
-              pickle.dump(cookies, file)
-          else:
-             raise Exception("We apparently aren't logged in, so we can't save cookies.")
-
-        # Navigate to the Facebook login page
-        self.get('https://www.facebook.com/')
-
-        # use cookies if they exist
-        if os.path.exists("cookies.pkl"):
-            # Load the cookies from the file
-            with open("cookies.pkl", "rb") as file:
-                cookies = pickle.load(file)
-                for cookie in cookies:
-                    self.add_cookie(cookie)
-
-            # Navigate to the Facebook login page
-            self.get('https://www.facebook.com/')
-            time.sleep(2)
-
-            if self.is_logged_in():
-                print("Successfully logged in.")
-            else:
-               raise Exception("Not logged in after loading cookies.")
-
-            return
-
-
-        # Navigate to the Facebook login page
-        self.get('https://www.facebook.com/')
-
-        # Wait for the login page to load
-        time.sleep(2)
-
-        # Locate the email/phone number field and enter the username
-        email_input = self.find_element(By.ID, 'email')
-        email_input.send_keys(username)
-
-        # Locate the password field and enter the password
-        password_input = self.find_element(By.ID, 'pass')
-        password_input.send_keys(password)
-
-        # Press Enter to submit the form and log in
-        password_input.send_keys(Keys.RETURN)
-
-        # Wait for the main page to load after login
-        time.sleep(5)
-
-        # Ask the user to manually log in
-        root = tk.Tk()
-        root.title("Click OK when you're logged in")
-
-        ok_button = tk.Button(
-            root, text="I'm logged in", 
-            command=(lambda x: [save_cookies(), root.quit()])
-        )
-        ok_button.pack(pady=20, padx=20)
-
-        root.mainloop()
-
 def scape_posts_from_user(url:str):
 
-  driver=FacebookWebDriver()
-  driver.login_to_facebook(
-    os.environ.get("FACEBOOK_USERNAME"),
-    os.environ.get("FACEBOOK_PASSWORD")
-  )
-  # util.fullpage_screenshot(driver, "test.png")
-  driver.save_screenshot("test.png")
-  driver.quit()
+  # Initialize the Graph API with your access token
+  graph = facebook.GraphAPI(access_token=os.environ.get("FACEBOOK_ACCESS_TOKEN"), version="3.1")
 
-  # scrape posts from single user with selenium, save to nosql
+  # Get your profile information
+  user_profile = graph.get_object('me')
 
-  # client.chat.completions.create
+  # Print your profile information
+  print(user_profile)
 
   pass
 

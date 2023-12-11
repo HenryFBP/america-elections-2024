@@ -1,3 +1,17 @@
+# America Elections 2024
+
+# Running
+
+1.  `poetry init; poetry shell`
+2.  Create `.env` with this content:
+    
+    ```
+    OPENAI_API_KEY=fillmeinplease
+    FACEBOOK_ACCESS_TOKEN=fillmeinplease
+    ```
+
+3.  `poetry run src/test.py`
+
 # Tech
 
 https://ollama.ai/library/mistral
